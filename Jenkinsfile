@@ -16,6 +16,7 @@ pipeline{
 
       steps {
         sh '''
+          echo "트리거 테스트 중....."
           ls -la
           node --version
           npm --version
@@ -55,11 +56,10 @@ pipeline{
           echo "프로젝트 배포중... 사이트 아이디 : $NETLIFY_SITE_ID"
           node_modules/.bin/netlify status
           node_modules/.bin/netlify deploy --dir=build --prod
-
         '''
       }
     }
-  }
+  } 
   post {
     always {
       junit 'jest-results/junit.xml'
