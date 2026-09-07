@@ -49,5 +49,11 @@
     "titleTemplate": "{classname}-{title}",
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
+  },
+  "allowScripts": {
+    "core-js@3.33.0": true,
+    "core-js-pure@3.33.0": true,
+    "fsevents@2.3.3": true,
+    "fsevents@2.3.2": true
   }
 }
