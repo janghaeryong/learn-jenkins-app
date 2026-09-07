@@ -1,4 +1,4 @@
-pipline{
+pipeline{
   agent any
 
   stages{
@@ -8,4 +8,4 @@ pipline{
       }
     }
   }
-}
+}  
