@@ -19,13 +19,18 @@ pipeline{
           npm ci
           npm run build
           ls -la
+          find build -type f -name "index.html"
         '''
       }
     }
     
     stage('Test'){
       steps {
-        echo 'Test stage'
+         sh '''
+          ls -la
+          npm run test
+          ls -la
+        '''
       }
     }
   }
