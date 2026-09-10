@@ -4,6 +4,10 @@ pipeline {
 
     environment {
       AWS_DEFAULT_REGION = 'ap-northeast-2'
+      AWS_ECS_CLUSTER = 'tough-frog-zis1pe'
+      AWS_ECS_SERVICE_PROD = 'LearnJenkinsApp-Service-Prod'
+      AWS_ECS_TD_RPOD = 'LearnJenkinsApp-TaskDefinition-Prod'
+      
     }
 
     stages {
@@ -24,7 +28,8 @@ pipeline {
                   yum install jq -y
                   LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json | jq '.taskDefinition.revision')
                   echo $LATEST_TD_REVISION
-                  aws ecs update-service --cluster tough-frog-zis1pe --service LearnJenkinsApp-Service-Prod --task-definition LearnJenkinsApp-TaskDefinition-Prod:$LATEST_TD_REVISION
+                  aws ecs update-service --cluster $AWS_ECS_CLUSTER --service $AWS_ECS_SERVICE_PROD --task-definition $AWS_ECS_TD_RPOD:$LATEST_TD_REVISION
+                  aws ecs wait services-stable --cluster $AWS_ECS_CLUSTER --service $AWS_ECS_SERVICE_PROD
                 '''
               }
             }
